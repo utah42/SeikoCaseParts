@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>精工中古表款 外壳 - 表镜 - 表冠 型号查询</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f5f6f8;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --line: #d1d5db;
+      --accent: #1f2937;
+      --hit-bg: #fff7d1;
+      --hit-mark: #facc15;
+      --warn: #b45309;
+      --radius: 12px;
+      --pad: clamp(12px, 3vw, 28px);
+    }
+    * { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Segoe UI", "Microsoft YaHei", "Yu Gothic", sans-serif;
+      color: var(--text);
+      background: linear-gradient(180deg, #eef1f5 0%, var(--bg) 180px);
+      padding: var(--pad);
+    }
+    .wrap { width: min(960px, 100%); margin: 0 auto; }
+    .top {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 12px 16px;
+      align-items: flex-start;
+      margin-bottom: 14px;
+    }
+    h1 {
+      margin: 0;
+      font-size: clamp(16px, 4.2vw, 22px);
+      line-height: 1.35;
+      font-weight: 700;
+      max-width: 42rem;
+      flex: 1 1 220px;
+    }
+    .langs { display: flex; gap: 8px; flex-shrink: 0; }
+    .langs button {
+      min-width: 44px; min-height: 36px;
+      padding: 6px; cursor: pointer; line-height: 0;
+      border: 1px solid var(--line); background: var(--card); border-radius: 8px;
+      display: inline-flex; align-items: center; justify-content: center;
+    }
+    .langs button svg { width: 30px; height: 20px; display: block; border-radius: 2px; box-shadow: 0 0 0 1px rgba(0,0,0,.08); }
+    .langs button.active { outline: 2px solid var(--accent); outline-offset: 1px; background: #f3f4f6; }
+    .panel {
+      background: var(--card);
+      border: 1px solid #e5e7eb;
+      border-radius: var(--radius);
+      box-shadow: 0 8px 24px rgba(15, 23, 42, .06);
+      padding: clamp(12px, 2.5vw, 18px);
+      margin-bottom: 16px;
+    }
+    .bar {
+      display: grid;
+      grid-template-columns: auto auto minmax(0, 1fr) auto;
+      gap: 10px 12px;
+      align-items: end;
+    }
+    .field, .eq, .query-btn { display: flex; flex-direction: column; gap: 6px; }
+    .eq { align-items: center; justify-content: flex-end; padding-bottom: 10px; }
+    .eq span { font-size: 18px; font-weight: 700; color: var(--muted); line-height: 1; }
+    .lbl { font-size: 13px; color: var(--muted); }
+    select, input[type="text"], #btn {
+      font: inherit;
+      font-size: 16px;
+      min-height: 44px;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--text);
+    }
+    select { min-width: 7.5rem; }
+    input[type="text"] { width: 100%; }
+    #btn {
+      cursor: pointer;
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+      font-weight: 600;
+      padding-inline: 18px;
+      white-space: nowrap;
+    }
+    #btn:active { transform: translateY(1px); }
+    .meta { color: var(--muted); font-size: 13px; margin: 0 0 10px; }
+    .empty { color: var(--warn); font-size: 16px; margin: 0; padding: 8px 2px; }
+    .table-wrap {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--card);
+    }
+    table { border-collapse: collapse; width: 100%; min-width: 480px; }
+    th, td {
+      border-bottom: 1px solid #e5e7eb;
+      border-right: 1px solid #eef0f3;
+      padding: 10px 12px;
+      text-align: left;
+      font-family: Consolas, "MS Gothic", ui-monospace, monospace;
+      font-size: 14px;
+      word-break: break-word;
+    }
+    th:last-child, td:last-child { border-right: none; }
+    tr:last-child td { border-bottom: none; }
+    th { background: #f3f4f6; position: sticky; top: 0; z-index: 1; font-weight: 600; }
+    td.hit-col { background: var(--hit-bg); }
+    mark.hit { background: var(--hit-mark); color: #111827; padding: 0 1px; border-radius: 2px; font-weight: 700; }
+
+    @media (max-width: 720px) {
+      .bar {
+        grid-template-columns: 1fr auto;
+        grid-template-areas:
+          "field field"
+          "eq input"
+          "btn btn";
+      }
+      .field { grid-area: field; }
+      .eq { grid-area: eq; justify-content: center; padding-bottom: 0; align-self: center; }
+      .query-input { grid-area: input; }
+      .query-btn { grid-area: btn; }
+      select, #btn { width: 100%; }
+      .langs button { min-width: 48px; min-height: 40px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+  <div class="top">
+    <h1 data-i18n="title">精工中古表款 外壳 - 表镜 - 表冠 型号查询</h1>
+    <div class="langs" role="group" aria-label="Language">
+      <button type="button" data-lang="zh" title="中文" aria-label="中文">
+        <svg viewBox="0 0 30 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect width="30" height="20" fill="#DE2910"/>
+          <g fill="#FFDE00">
+            <polygon points="5,2 5.9,4.8 8.9,4.8 6.5,6.5 7.4,9.3 5,7.6 2.6,9.3 3.5,6.5 1.1,4.8 4.1,4.8"/>
+            <polygon transform="translate(10,2) rotate(20)" points="0,-1.2 0.35,-0.1 1.5,-0.1 0.55,0.55 0.9,1.65 0,1  -0.9,1.65 -0.55,0.55 -1.5,-0.1 -0.35,-0.1"/>
+            <polygon transform="translate(12.2,4.2) rotate(45)" points="0,-1.2 0.35,-0.1 1.5,-0.1 0.55,0.55 0.9,1.65 0,1  -0.9,1.65 -0.55,0.55 -1.5,-0.1 -0.35,-0.1"/>
+            <polygon transform="translate(12.2,7) rotate(70)" points="0,-1.2 0.35,-0.1 1.5,-0.1 0.55,0.55 0.9,1.65 0,1  -0.9,1.65 -0.55,0.55 -1.5,-0.1 -0.35,-0.1"/>
+            <polygon transform="translate(10,9.2) rotate(20)" points="0,-1.2 0.35,-0.1 1.5,-0.1 0.55,0.55 0.9,1.65 0,1  -0.9,1.65 -0.55,0.55 -1.5,-0.1 -0.35,-0.1"/>
+          </g>
+        </svg>
+      </button>
+      <button type="button" data-lang="en" title="English" aria-label="English">
+        <svg viewBox="0 0 60 30" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect width="60" height="30" fill="#012169"/>
+          <path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/>
+          <path d="M0,0 L60,30 M60,0 L0,30" stroke="#C8102E" stroke-width="2"/>
+          <path d="M30,0 V30 M0,15 H60" stroke="#fff" stroke-width="10"/>
+          <path d="M30,0 V30 M0,15 H60" stroke="#C8102E" stroke-width="6"/>
+        </svg>
+      </button>
+      <button type="button" data-lang="ja" title="日本語" aria-label="日本語">
+        <svg viewBox="0 0 30 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect width="30" height="20" fill="#fff" stroke="#ddd" stroke-width="0.4"/>
+          <circle cx="15" cy="10" r="6" fill="#BC002D"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+  <div class="panel">
+  <div class="bar">
+    <div class="field">
+      <span class="lbl" data-i18n="field">查询部件型号</span>
+      <select id="keyType">
+        <option value="case" data-i18n="optCase">表壳</option>
+        <option value="glass" data-i18n="optGlass">表镜</option>
+        <option value="crown" data-i18n="optCrown">表冠</option>
+      </select>
+    </div>
+    <div class="eq"><span data-i18n="value">=</span></div>
+    <div class="query-input">
+      <input id="keyValue" type="text" autocomplete="off" enterkeyhint="search" />
+    </div>
+    <div class="query-btn">
+      <button id="btn" type="button" data-i18n="search">查询</button>
+    </div>
+  </div>
+  </div>
+  <div id="out"></div>
+  </div>
+  <script>
+    const I18N = {
+      zh: {
+        htmlLang: "zh-CN",
+        title: "精工中古表款 外壳 - 表镜 - 表冠 型号查询",
+        field: "查询部件型号",
+        value: "=",
+        search: "查询",
+        optCase: "表壳",
+        optGlass: "表镜",
+        optCrown: "表冠",
+        placeholderCase: "例如 45、4502、4502-7001，或以#代替未知数字 45##-7001",
+        placeholderGlass: "例如 325、325W06，或以#代替未知数字 325###",
+        placeholderCrown: "例如 55W、55W32D，或以#代替未知数字 55W###",
+        empty: "无数据",
+        count: "共 {n} 条",
+        thCase: "表壳",
+        thGlass: "表镜",
+        thCrown: "表冠"
+      },
+      en: {
+        htmlLang: "en",
+        title: "Vintage Seiko Case - Crystal - Crown Model Lookup",
+        field: "Lookup part model",
+        value: "=",
+        search: "Search",
+        optCase: "Case No",
+        optGlass: "Glass",
+        optCrown: "Crown",
+        placeholderCase: "e.g. 45, 4502, 4502-7001, or # for unknown digits: 45##-7001",
+        placeholderGlass: "e.g. 325, 325W06, or # for unknown digits: 325###",
+        placeholderCrown: "e.g. 55W, 55W32D, or # for unknown digits: 55W###",
+        empty: "No data",
+        count: "{n} result(s)",
+        thCase: "Case No",
+        thGlass: "Glass",
+        thCrown: "Crown"
+      },
+      ja: {
+        htmlLang: "ja",
+        title: "ヴィンテージセイコー ケース・風防・竜頭 型番検索",
+        field: "部品型番検索",
+        value: "=",
+        search: "検索",
+        optCase: "ケース",
+        optGlass: "風防",
+        optCrown: "竜頭",
+        placeholderCase: "例: 45、4502、4502-7001、または#で不明数字 45##-7001",
+        placeholderGlass: "例: 325、325W06、または#で不明数字 325###",
+        placeholderCrown: "例: 55W、55W32D、または#で不明数字 55W###",
+        empty: "データなし",
+        count: "{n} 件",
+        thCase: "ケース",
+        thGlass: "風防",
+        thCrown: "竜頭"
+      }
+    };
+
+    const ROWS = [{"case": "1100-1310", "glass": "140N06GC0A", "crown": "45R09NA1"}, {"case": "1100-3720", "glass": "ES0N21GC0F", "crown": "50R35NA1"}, {"case": "1100-4670", "glass": "SA3N65GN00", "crown": "45D01NS1"}, {"case": "1100-4670", "glass": "SA3N65GN00", "crown": "45D01NA1"}, {"case": "1100-4900", "glass": "ES0N51GN00", "crown": "45D01NA1"}, {"case": "1100-5080", "glass": "ES2N21AN00", "crown": "45D01NS1"}, {"case": "1100-5080", "glass": "ES2N21AN00", "crown": "45D01NA1"}, {"case": "1100-8380", "glass": "ES1N83GN00", "crown": "45D01NA1"}, {"case": "1100-8520", "glass": "ES1N87GN00", "crown": "45D01NA1"}, {"case": "2100-9990", "glass": "ES2N21AN00", "crown": "45D01NS1"}, {"case": "2206-0760", "glass": "200W29GN00", "crown": "45W29NS1"}, {"case": "2220-0630", "glass": "300N00GEE0", "crown": "40R17NS1"}, {"case": "2220-0630", "glass": "300N00GEE0", "crown": "40R17NA1"}, {"case": "2220-0640", "glass": "ES2N37GEE0", "crown": "40R17NS1"}, {"case": "2220-0640", "glass": "ES2N37GEE0", "crown": "40R17NA1"}, {"case": "2220-5030", "glass": "SA5N81GEE0", "crown": "40R17NS1"}, {"case": "2220-5040", "glass": "SA5N81GZC0", "crown": "40R17NA1"}, {"case": "6306-8070", "glass": "メーカー保証品", "crown": ""}, {"case": "6306-807A", "glass": "メーカー保証品", "crown": ""}, {"case": "7019-5130", "glass": "SA1W57AN00", "crown": "40M81NS1"}, {"case": "7019-8120", "glass": "290G19GNS0", "crown": "40M69NS1"}, {"case": "7019-8120", "glass": "290G19GNG0", "crown": "40M69NA1"}, {"case": "1100-1300", "glass": "160N41GN00", "crown": "45D01NS1"}, {"case": "1100-1300", "glass": "160N41GN00", "crown": "45D01NA1"}, {"case": "1100-1330", "glass": "150N25AN00", "crown": "40S51NA1"}, {"case": "1100-1330", "glass": "150N08AN00", "crown": "40S51NJ1"}, {"case": "1100-4500", "glass": "SA2N97GN00", "crown": "45D01NA1"}, {"case": "1100-4740", "glass": "ES2N01GN00", "crown": "45D01NS1"}, {"case": "1100-5030", "glass": "SA4N67GN00", "crown": "45D01NA1"}, {"case": "1100-5050", "glass": "RE3N95GN00", "crown": "45D01NA1"}, {"case": "1100-5060", "glass": "KO2N37GN00", "crown": "45D01NS1"}, {"case": "1100-5060", "glass": "KO2N37GN00", "crown": "45D01NA1"}, {"case": "1100-5070", "glass": "SA4N91GN00", "crown": "45D01NS1"}, {"case": "1100-5070", "glass": "SA4N91GN00", "crown": "45D01NA1"}, {"case": "1100-5100", "glass": "KO2N39GN00", "crown": "45D01NS1"}, {"case": "1100-5100", "glass": "KO2N39GN00", "crown": "45D01NA1"}, {"case": "1100-5110", "glass": "SA5N09GN00", "crown": "45D01NS1"}, {"case": "1100-5110", "glass": "SA5N09GN00", "crown": "45D01NA1"}, {"case": "1100-8370", "glass": "ES1N83GN00", "crown": "45D01NA1"}, {"case": "1100-8400", "glass": "SA3N51GN00", "crown": "45D01NA1"}, {"case": "1100-8420", "glass": "K01N99GN00", "crown": "45D01NA1"}, {"case": "1140-7231", "glass": "K01N39GA00", "crown": "45D01NS1"}, {"case": "1140-7231", "glass": "K01N39GA00", "crown": "45D01NA1"}, {"case": "2205-0420", "glass": "195V03GNS0", "crown": "45W29NS1"}, {"case": "2205-0570", "glass": "195V03GNS0", "crown": "45W29NS1"}, {"case": "2205-0580", "glass": "195V15GCSF", "crown": "45W29NS1"}, {"case": "2206-0480", "glass": "190G03GNS0", "crown": "45W29NS1"}, {"case": "2220-3590", "glass": "SA4N47GN00", "crown": "40R04NA1"}, {"case": "2220-5000", "glass": "SA4N73GN00", "crown": "45R09NS1"}, {"case": "2220-5000", "glass": "SA4N73GN00", "crown": "45R09NA1"}, {"case": "2220-5010", "glass": "RE3N93GN00", "crown": "40R04NS1"}, {"case": "2220-5010", "glass": "RE3N93GN00", "crown": "40R04NA1"}, {"case": "2220-7260", "glass": "SA4N43GN00", "crown": "40R04NA1"}, {"case": "2411-302A", "glass": "SA1N95GNY0", "crown": "50R35NS1"}, {"case": "2411-302B", "glass": "SA1N95GNL0", "crown": "50R35NS1"}, {"case": "2411-7000", "glass": "K01N31GN00", "crown": "45R09NS1"}, {"case": "2411-7000", "glass": "K01N31GN00", "crown": "45R09NA1"}, {"case": "2906-0180", "glass": "205W10GA", "crown": "50E04NS"}, {"case": "2906-018A", "glass": "205W10GA", "crown": "50E04NS"}, {"case": "2906-0190", "glass": "205W10GA", "crown": "50E04NS"}, {"case": "2906-019A", "glass": "205W10GA", "crown": "50E04NS"}, {"case": "2906-019B", "glass": "205W10GA", "crown": "50E04NS"}, {"case": "2906-3080", "glass": "SA0W48AN", "crown": "45M40NS"}, {"case": "7019-5010", "glass": "SA0W21AN00", "crown": "40M53NS1"}, {"case": "7019-5070", "glass": "RE0W25AN00", "crown": "45M29NS1"}, {"case": "7019-8010", "glass": "310T49ANS0", "crown": "40M23NS1"}, {"case": "8800-5091", "glass": "508N01GN00", "crown": "11E07NS1"}, {"case": "0702-3000", "glass": "340N07AA", "crown": "65N03N"}, {"case": "0702-3010", "glass": "340N07AA", "crown": "65N03N"}, {"case": "0702-6010", "glass": "285V21GN", "crown": "40M63N"}, {"case": "0702-7070", "glass": "300W43GN", "crown": "40M63N"}, {"case": "0702-8010", "glass": "290G05GN", "crown": "40M69N"}, {"case": "0702-8020", "glass": "300W76GN", "crown": "40M69N"}, {"case": "0703-5000", "glass": "SA0W87AN", "crown": "40M35N"}, {"case": "0703-5001", "glass": "SA0W87AN", "crown": "40M35N"}, {"case": "0703-6010", "glass": "285V21GNA", "crown": "40M63N"}, {"case": "0703-6011", "glass": "285V21GNS", "crown": "40M63N"}, {"case": "0703-6020", "glass": "285V31GC", "crown": "40M61N"}, {"case": "0703-6030", "glass": "290W09GC", "crown": "40M61N"}, {"case": "0703-7000", "glass": "295V01GN", "crown": "40M63N"}, {"case": "0703-7010", "glass": "295V05GC", "crown": "40M63N"}, {"case": "0703-7020", "glass": "295V01GN", "crown": "40M63N"}, {"case": "0703-7030", "glass": "280G05GC", "crown": "40M69N"}, {"case": "0703-7040", "glass": "290W09GC", "crown": "40M63N"}, {"case": "0703-7050", "glass": "280G09GC", "crown": "40M69N"}, {"case": "0703-7060", "glass": "300W45GC", "crown": "40M65N"}, {"case": "0703-7070", "glass": "300W43GN", "crown": "40M63N"}, {"case": "0703-7080", "glass": "300T29AB", "crown": "40M69N"}, {"case": "0703-7090", "glass": "300W49GC", "crown": "40M65N"}, {"case": "0703-7100", "glass": "280G27GC", "crown": "40M69N"}, {"case": "0703-7110", "glass": "280G29GA", "crown": "40M69N"}, {"case": "0703-8000", "glass": "290G03GN", "crown": "40M69N"}, {"case": "0703-8010", "glass": "290G05GN", "crown": "40M69N"}, {"case": "0703-8020", "glass": "300W76GN", "crown": "40M69N"}, {"case": "0703-8030", "glass": "300W59GA", "crown": "50M25N"}, {"case": "0703-8040", "glass": "295W13GN", "crown": "40M35N"}, {"case": "0723-6000", "glass": "285V17GC", "crown": "40M71N"}, {"case": "0723-6010", "glass": "285V21GNA", "crown": "40M71N"}, {"case": "0723-6020", "glass": "285V51GC", "crown": "40M71N"}, {"case": "0723-7000", "glass": "280G13GN", "crown": "40M69N"}, {"case": "1000-0020", "glass": "140N07AC", "crown": "45S05N"}, {"case": "1000-0030", "glass": "160N02AC", "crown": "45S05N"}, {"case": "1000-0080", "glass": "170N02AC", "crown": "50S07N"}, {"case": "1000-0090", "glass": "150N05AC", "crown": "50S07N"}, {"case": "1000-0100", "glass": "150N10AC", "crown": "50S07N"}, {"case": "1000-0120", "glass": "170N02AC", "crown": "50R35N"}, {"case": "1000-0140", "glass": "150N10AC", "crown": "50S07N"}, {"case": "1000-0150", "glass": "150N10AC", "crown": "50S07N"}, {"case": "1000-0160", "glass": "150N10AC", "crown": "50S07N"}, {"case": "3302-8030", "glass": "310T29AN", "crown": "40M53N"}, {"case": "3302-8070", "glass": "310T29AN", "crown": "40M53N"}, {"case": "3302-8080", "glass": "300V09GN", "crown": "40M53N"}, {"case": "3302-8080E", "glass": "300V37GC", "crown": "40M53N"}, {"case": "3303-8070", "glass": "310T29AN", "crown": "40M53N"}, {"case": "3303-8080", "glass": "300V09GN", "crown": "40M53N"}, {"case": "3303-8080E", "glass": "300V37GC", "crown": "40M53N"}, {"case": "3303-8110", "glass": "300V09GN", "crown": "40M53N"}, {"case": "3303-8110E", "glass": "300V39GC", "crown": "40M53N"}, {"case": "3303-8120", "glass": "300V09GN", "crown": "40M53N"}, {"case": "3303-8120E", "glass": "300V41GC", "crown": "40M53N"}, {"case": "2906-0120", "glass": "195W22GC", "crown": "45M40NS"}, {"case": "2906-0130", "glass": "195W20GC", "crown": "45M40NS"}, {"case": "2906-3050", "glass": "SA0W52GN", "crown": "45M40NS"}, {"case": "3700-7000", "glass": "300T20AN", "crown": "40M16N"}, {"case": "3700-8000", "glass": "310T18AN", "crown": "40M16N"}, {"case": "3702-0010", "glass": "317N02AN", "crown": "50M20N"}, {"case": "3702-7000", "glass": "300T20AN", "crown": "40M16N"}, {"case": "3702-7001", "glass": "300T20AN", "crown": "40M16N"}, {"case": "3702-7010", "glass": "300T20AN", "crown": "40M16N"}, {"case": "3702-8000", "glass": "310T18AN", "crown": "40M16N"}, {"case": "3703-7000", "glass": "300T30AN", "crown": "40M16N"}, {"case": "3703-7020", "glass": "300T30AN", "crown": "40M16N"}, {"case": "3703-8000", "glass": "310T24AN", "crown": "40M16N"}, {"case": "3703-8010", "glass": "310V10GN", "crown": "40M16N"}, {"case": "3703-8020", "glass": "310V14GN", "crown": "40M16N"}, {"case": "3703-8030", "glass": "310V18GC", "crown": "40M16N"}, {"case": "4005-7000", "glass": "325T04AN", "crown": "55W06N"}, {"case": "4005-7001", "glass": "325T04AN", "crown": "55W06N"}, {"case": "4005-7002", "glass": "325T04AN", "crown": "55M06N"}, {"case": "4006-6000", "glass": "325T02AN", "crown": "55W06N"}, {"case": "4006-6020", "glass": "325T02AN", "crown": "55W06N"}, {"case": "4006-6070", "glass": "325T02AN", "crown": "55M18N"}, {"case": "4006-7000", "glass": "325T02AN", "crown": "55W06N"}, {"case": "4006-7001", "glass": "325T02AN", "crown": "55W06N"}, {"case": "4006-7011", "glass": "325T02AN", "crown": "55W06N"}, {"case": "4006-7012", "glass": "325T02AN", "crown": "55M06N"}, {"case": "4400-2000", "glass": "330N01AN", "crown": "50R03D"}, {"case": "4400-9990", "glass": "331W01AN", "crown": "55W32D"}, {"case": "4402-8000", "glass": "320W01AN", "crown": "55W39D"}, {"case": "4420-9000", "glass": "325W06AN", "crown": "55W41E"}, {"case": "4420-9990", "glass": "330W01AN", "crown": "55W32D"}, {"case": "4500-2000", "glass": "340N05AN", "crown": "65N01N"}, {"case": "4500-7000", "glass": "300V07GN", "crown": "55W45E"}, {"case": "4500-7001", "glass": "300V07GN", "crown": "55W45E"}, {"case": "4500-7010", "glass": "300V07GN", "crown": "55W45E"}, {"case": "4500-8000", "glass": "310T07AN", "crown": "55W45E"}, {"case": "4500-8010", "glass": "310T21AN", "crown": "55W45E"}, {"case": "4502-7000", "glass": "300V07GN", "crown": "55W45E"}, {"case": "4502-7001", "glass": "300V07GN", "crown": "55W45E"}, {"case": "4502-7010", "glass": "300V07GN", "crown": "55W45E"}, {"case": "4502-8000", "glass": "310T07AN", "crown": "55W45E"}, {"case": "4502-8010", "glass": "310T21AN", "crown": "55W45E"}, {"case": "4520-7000", "glass": "300V07GN", "crown": "55W41E"}, {"case": "4520-7001", "glass": "300V07GN", "crown": "55W41E"}, {"case": "4520-7010", "glass": "300V07GN", "crown": "55W41E"}, {"case": "4520-8000", "glass": "310T07AN", "crown": "55W41E"}, {"case": "4522-7000", "glass": "300V07GN", "crown": "55W41E"}, {"case": "4522-7001", "glass": "300V07GN", "crown": "55W41E"}, {"case": "4522-7010", "glass": "300V07GN", "crown": "55W41E"}, {"case": "4522-8000", "glass": "310T07AN", "crown": "55W41E"}, {"case": "5106-7000", "glass": "310W07AN", "crown": "45E01N"}, {"case": "5106-7010", "glass": "300T03AN", "crown": "45E01N"}, {"case": "5106-7020", "glass": "300T03AN", "crown": "45E01N"}, {"case": "5106-7030", "glass": "300V07GN", "crown": "45E01N"}, {"case": "5106-8010", "glass": "320W08AN", "crown": "45E01N"}, {"case": "5106-8020", "glass": "320W15GN", "crown": "45E01N"}, {"case": "5126-6000", "glass": "320W08AN", "crown": "40M25N"}, {"case": "5126-6010", "glass": "330W16GN", "crown": "45M03N"}, {"case": "5126-6030", "glass": "320W10GN", "crown": "45M03N"}, {"case": "5126-7000", "glass": "300T01AN", "crown": "40M17N"}, {"case": "5126-7010", "glass": "310W07AN", "crown": "40M17N"}, {"case": "5126-7020", "glass": "310W11GN", "crown": "40M29N"}, {"case": "5126-7030", "glass": "310W11GN", "crown": "40M29N"}, {"case": "5126-8010", "glass": "315T07AN", "crown": "40M17N"}, {"case": "5126-8020", "glass": "320W08AN", "crown": "40M23N"}, {"case": "5126-8040", "glass": "315T11AN", "crown": "40M23N"}, {"case": "5126-8050", "glass": "315T11AN", "crown": "40M23N"}, {"case": "5126-8060", "glass": "315T11AN", "crown": "40M23N"}, {"case": "5126-8070", "glass": "315T11AN", "crown": "40M25N"}, {"case": "5126-8080", "glass": "320W10GN", "crown": "40M29N"}, {"case": "5126-8090", "glass": "320W10GN", "crown": "40M29N"}, {"case": "5126-8100", "glass": "320W10GN", "crown": "40M29N"}, {"case": "5126-8110", "glass": "315T11AN", "crown": "40M25N"}, {"case": "5126-8120", "glass": "320W10GN", "crown": "40M29N"}, {"case": "5126-8130", "glass": "320W10GN", "crown": "40M29N"}, {"case": "5139-6000", "glass": "315T15AN", "crown": "40M29N"}, {"case": "5139-7000", "glass": "300T01AN", "crown": "40M17N"}, {"case": "5139-7010", "glass": "300T03AN", "crown": "40M17N"}, {"case": "5139-7020", "glass": "300T03AN", "crown": "40M21N"}, {"case": "5139-7030", "glass": "300T03AN", "crown": "40M23N"}, {"case": "5139-7040", "glass": "300T01AN", "crown": "40M25N"}, {"case": "5139-7050", "glass": "300T09AN", "crown": "40M17N"}, {"case": "5139-7060", "glass": "300T11AN", "crown": "40M23N"}, {"case": "5139-8000", "glass": "315T11AN", "crown": "40M23N"}, {"case": "5146-5000", "glass": "SA0W01AN", "crown": "45E01N"}, {"case": "5146-5001", "glass": "SA0W03AN", "crown": "45E01N"}, {"case": "5146-5010", "glass": "SA0W01AN", "crown": "45E01N"}, {"case": "5146-5011", "glass": "SA0W03AN", "crown": "45E01N"}, {"case": "5146-5020", "glass": "SA0W01AN", "crown": "45E01N"}, {"case": "5146-5021", "glass": "SA0W03AN", "crown": "45E01N"}, {"case": "5146-7000", "glass": "300T01AN", "crown": "45E01N"}, {"case": "5146-7010", "glass": "300T01AN", "crown": "45E01N"}, {"case": "5146-7020", "glass": "310W11GN", "crown": "45E01N"}, {"case": "5146-7030", "glass": "310W11GN", "crown": "45E01N"}, {"case": "5146-7040", "glass": "300V07GN", "crown": "45E01N"}, {"case": "5146-7050", "glass": "290W03GN", "crown": "45E01N"}, {"case": "5146-7060", "glass": "300T21AN", "crown": "45E01N"}, {"case": "5146-7080", "glass": "300V07GN", "crown": "45E01N"}, {"case": "5146-7090", "glass": "300T03AN", "crown": "45E01N"}, {"case": "5206-5000", "glass": "BA0W05AN", "crown": "45W39N"}, {"case": "5206-5001", "glass": "BA0W05AN", "crown": "45W39N"}, {"case": "5206-5010", "glass": "K00V05GN", "crown": "45W39N"}, {"case": "5206-5020", "glass": "SA0W33AN", "crown": "45W39N"}, {"case": "5206-5030", "glass": "ES0V01GN", "crown": "45W39N"}, {"case": "5206-5040", "glass": "K00V05GN", "crown": "45W39N"}, {"case": "5206-5050", "glass": "BA0W13AN", "crown": "45W39N"}, {"case": "5206-5060", "glass": "ES0V05GN", "crown": "45W39N"}, {"case": "5206-5070", "glass": "SA0W57AN", "crown": "45W39N"}, {"case": "5206-5080", "glass": "ES0V09GC", "crown": "45W39N"}, {"case": "5206-6000", "glass": "290T01AN", "crown": "40M71N"}, {"case": "5206-6010", "glass": "290T01AN", "crown": "40M23N"}, {"case": "5206-6020", "glass": "285V03GN", "crown": "40M47N"}, {"case": "5206-6021", "glass": "285V03GN", "crown": "45M13N"}, {"case": "5206-6030", "glass": "285V03GN", "crown": "40M71N"}, {"case": "5206-6040", "glass": "お預りの上修理いたします。", "crown": "45W45N"}, {"case": "5206-6050", "glass": "290T01AN", "crown": "40M47N"}, {"case": "5206-6051", "glass": "290T01AN", "crown": "45M13N"}, {"case": "5206-6060", "glass": "285V03GN", "crown": "40M47N"}, {"case": "5206-6061", "glass": "285V03GN", "crown": "45M13N"}, {"case": "5206-6070", "glass": "285V07GN", "crown": "45W39N"}, {"case": "5206-6080", "glass": "285V03GN", "crown": "40M47N"}, {"case": "5206-6081", "glass": "285V03GN", "crown": "45M13N"}, {"case": "5206-6090", "glass": "285V09GC", "crown": "45M15N"}, {"case": "5206-6100", "glass": "285V15GC", "crown": "45M13N"}, {"case": "5206-6110", "glass": "285V03GN", "crown": "45M13N"}, {"case": "5206-6120", "glass": "285V03GN", "crown": "45M13N"}, {"case": "5206-6130", "glass": "285V03GN", "crown": "45M13N"}, {"case": "5206-6140", "glass": "285V27GN", "crown": "45W39N"}, {"case": "5206-6150", "glass": "285V35GC", "crown": "45M13N"}, {"case": "5216-5000", "glass": "SA0W65GC", "crown": "45W39N"}, {"case": "5216-5001", "glass": "SA0W65GC", "crown": "45W39N"}, {"case": "5216-5010", "glass": "SA0W81AN", "crown": "45W39N"}, {"case": "5216-6000", "glass": "285V33GC", "crown": "45M15N"}, {"case": "5216-6010", "glass": "285V45GC", "crown": "45M15N"}, {"case": "5216-6020", "glass": "285V41GC", "crown": "50M31N"}, {"case": "5216-6030", "glass": "285V47GC", "crown": "45M13N"}, {"case": "5216-6040", "glass": "285V21GN", "crown": "45M13N"}, {"case": "5216-6050", "glass": "285V21GN", "crown": "45M15N"}, {"case": "5216-6060", "glass": "280W03GN", "crown": "50M33N"}, {"case": "5216-7000", "glass": "295V03GC", "crown": "50M33N"}, {"case": "5216-7010", "glass": "295V07GC", "crown": "50M33N"}, {"case": "5216-7011", "glass": "295V07GC", "crown": "50M33N"}, {"case": "5216-7020", "glass": "280G07GC", "crown": "50M33N"}, {"case": "5216-7030", "glass": "280G03GC", "crown": "50M33N"}, {"case": "5216-7040", "glass": "280G15GC", "crown": "50M33N"}, {"case": "5216-7050", "glass": "280G19GC", "crown": "50M31N"}, {"case": "5216-7060", "glass": "280G17GN", "crown": "50M33N"}, {"case": "5216-7070", "glass": "280G23GC", "crown": "50M33N"}, {"case": "5216-7080", "glass": "280G31GN", "crown": "50M31N"}, {"case": "5216-7090", "glass": "280G21GC", "crown": "50M33N"}, {"case": "5216-7100", "glass": "280G11GN", "crown": "50M33N"}, {"case": "5216-7110", "glass": "280G25GC", "crown": "50M31N"}, {"case": "5216-8010", "glass": "290G09GA", "crown": "50M33N"}, {"case": "5216-8020", "glass": "300W76GN", "crown": "50M33N"}, {"case": "5216-8030", "glass": "300G01GA", "crown": "55E03N"}, {"case": "5216-8040", "glass": "300G03GA", "crown": "55E03N"}, {"case": "5245-6000", "glass": "285V03GN", "crown": "45M09N"}, {"case": "5245-6010", "glass": "290T01AN", "crown": "45M09N"}, {"case": "5245-7000", "glass": "290V01GC", "crown": "45M09N"}, {"case": "5246-5020", "glass": "ES0V07GC", "crown": "45W51N"}, {"case": "5246-5040", "glass": "ES0V11GC", "crown": "45W51N"}, {"case": "5246-6000", "glass": "285V03GN", "crown": "45M09N"}, {"case": "5246-6010", "glass": "290T01AN", "crown": "45M09N"}, {"case": "5246-6030", "glass": "285V11GC", "crown": "45M11N"}, {"case": "5246-6040", "glass": "285V23GC", "crown": "45M11N"}, {"case": "5246-6041", "glass": "285V23GC", "crown": "45M11N"}, {"case": "5246-6050", "glass": "285V19GC", "crown": "45M11N"}, {"case": "5246-6051", "glass": "285V19GC", "crown": "45M11N"}, {"case": "5246-6060", "glass": "285V25GC", "crown": "45M09N"}, {"case": "5246-6070", "glass": "285V29GC", "crown": "45M11N"}, {"case": "5246-7000", "glass": "290V01GC", "crown": "45M09N"}, {"case": "5256-5000", "glass": "ES0V13GC", "crown": "45W51N"}, {"case": "5256-5010", "glass": "ES0W23GC", "crown": "45W51N"}, {"case": "5256-6000", "glass": "285V49GC", "crown": "50M29N"}, {"case": "5256-6010", "glass": "285V51GC", "crown": "50M29N"}, {"case": "5256-8000", "glass": "290G05GA", "crown": "45M11N"}, {"case": "5256-8010", "glass": "290G05GA", "crown": "50M29N"}, {"case": "5601-7000", "glass": "300T12AN", "crown": "45M04N"}, {"case": "5601-7010", "glass": "300T12AN", "crown": "45M04N"}, {"case": "5601-9000", "glass": "320T08AN", "crown": "45M04N"}, {"case": "5605-5000", "glass": "BA0W02AN", "crown": "45W30N"}, {"case": "5605-5010", "glass": "K00W02AN", "crown": "45M04N"}, {"case": "5605-7020", "glass": "300T12AN", "crown": "45M04N"}, {"case": "5605-7030", "glass": "300T12AN", "crown": "45M04N"}, {"case": "5605-7050", "glass": "300V16GN", "crown": "45M04N"}, {"case": "5605-7051", "glass": "300V48GN", "crown": "45M04N"}, {"case": "5606-5000", "glass": "BA0W02AN", "crown": "45W30N"}, {"case": "5606-5010", "glass": "SA0W02AN", "crown": "45M04N"}, {"case": "5606-5011", "glass": "SA0W02AN", "crown": "45M04N"}, {"case": "5606-5020", "glass": "SA0W02AN", "crown": "45M04N"}, {"case": "5606-5021", "glass": "SA0W02AN", "crown": "45M04N"}, {"case": "5606-5030", "glass": "RE0W04AN", "crown": "45W30N"}, {"case": "5606-5040", "glass": "SA0W16AN", "crown": "45W30N"}, {"case": "5606-5050", "glass": "K00V18GN", "crown": "45M04N"}, {"case": "5606-5080", "glass": "RE0V18GC", "crown": "45W30N"}, {"case": "5606-5120", "glass": "SA0W26AC", "crown": "45M04N"}, {"case": "5606-5130", "glass": "RE0W26AC", "crown": "45M04N"}, {"case": "5606-5140", "glass": "SA0W24AN", "crown": "45M04N"}, {"case": "5606-5160", "glass": "RE0W32AN", "crown": "45M04N"}, {"case": "5606-5170", "glass": "K00W42AC", "crown": "45M30N"}, {"case": "5606-5180", "glass": "BA0W28GN", "crown": "45M30N"}, {"case": "5606-5190", "glass": "SA1N12GN", "crown": "45W16N"}, {"case": "5606-5220", "glass": "BA0W34AN", "crown": "45W30N"}, {"case": "5606-5230", "glass": "SA0W46GN", "crown": "45W16N"}, {"case": "5606-6000", "glass": "270V04GN", "crown": "45M04N"}, {"case": "5606-6010", "glass": "270V04GN", "crown": "45M04N"}, {"case": "5606-6040", "glass": "290V04GN", "crown": "45M04N"}, {"case": "5606-6050", "glass": "290V04GN", "crown": "45M04N"}, {"case": "5606-6060", "glass": "270V04GN", "crown": "45M04N"}, {"case": "5606-7000", "glass": "300T12AN", "crown": "45M04N"}, {"case": "5606-7010", "glass": "300T12AN", "crown": "45M04N"}, {"case": "5606-7020", "glass": "300T12AN", "crown": "45M04N"}, {"case": "5606-7030", "glass": "300T12AN", "crown": "45M04N"}, {"case": "5606-7040", "glass": "300T12AN", "crown": "45M04N"}, {"case": "5606-7050", "glass": "300T12AN", "crown": "45M04N"}, {"case": "5606-7060", "glass": "300T12AN", "crown": "45M04N"}, {"case": "5606-7070", "glass": "300V04GN", "crown": "45M04N"}, {"case": "5606-7071", "glass": "300V04GN", "crown": "45M04N"}, {"case": "5606-7072", "glass": "300V04GN", "crown": "45M30N"}, {"case": "5606-7080", "glass": "300V04GN", "crown": "45M04N"}, {"case": "5606-7090", "glass": "320T08AN", "crown": "45M04N"}, {"case": "5606-7100", "glass": "300T12AN", "crown": "45M04N"}, {"case": "5606-7110", "glass": "300T12AN", "crown": "45M04N"}, {"case": "5606-7120", "glass": "300T12AN", "crown": "45M04N"}, {"case": "5606-7130", "glass": "300T12AN", "crown": "45M04N"}, {"case": "5606-7140", "glass": "300V04GN", "crown": "45M04N"}, {"case": "5606-7141", "glass": "300V04GN", "crown": "45M30N"}, {"case": "5606-7150", "glass": "300V16GN", "crown": "45M04N"}, {"case": "5606-7151", "glass": "300V16GN", "crown": "45M04N"}, {"case": "5606-7152", "glass": "300V16GN", "crown": "45M30N"}, {"case": "5606-7160", "glass": "300V16GN", "crown": "45M04N"}, {"case": "5606-7180", "glass": "300T12AN", "crown": "45M04N"}, {"case": "5606-7190", "glass": "300V16GN", "crown": "45M04N"}, {"case": "5606-7191", "glass": "300V48GN", "crown": "45M04N"}, {"case": "5606-7192", "glass": "300V48GN", "crown": "45M30N"}, {"case": "5606-7200", "glass": "300V26SE", "crown": "55M02N"}, {"case": "5606-7230", "glass": "300V62GC", "crown": "45M04N"}, {"case": "5606-7231", "glass": "300V62GC", "crown": "45M30N"}, {"case": "5606-7240", "glass": "300V16GN", "crown": "45M04N"}, {"case": "5606-7250", "glass": "300V16GN", "crown": "45M04N"}, {"case": "5606-7260", "glass": "300V16GN", "crown": "45M04N"}, {"case": "5606-7270", "glass": "300V62GC", "crown": "45M04N"}, {"case": "5606-7280", "glass": "300V98GC", "crown": "45M02N"}, {"case": "5606-7281", "glass": "300V98GC", "crown": "45M30N"}, {"case": "5606-7290", "glass": "300V98GC", "crown": "45M30N"}, {"case": "5606-7300", "glass": "300VA2GC", "crown": "45M30N"}, {"case": "5606-7310", "glass": "300V62GC", "crown": "45M30N"}, {"case": "5606-7320", "glass": "300V64GC", "crown": "45M30N"}, {"case": "5606-7330", "glass": "300W52GC", "crown": "45M30N"}, {"case": "5606-7340", "glass": "300W52GC", "crown": "45M30N"}, {"case": "5606-7341", "glass": "300W52GC", "crown": "45M30N"}, {"case": "5606-7350", "glass": "300W70GC", "crown": "45M30N"}, {"case": "5606-7351", "glass": "300W70GC", "crown": "45M30N"}, {"case": "5606-7360", "glass": "290W10GC", "crown": "45M30N"}, {"case": "5606-7370", "glass": "290W12GN", "crown": "45M30N"}, {"case": "5606-8000", "glass": "310T16AN", "crown": "45M04N"}, {"case": "5606-8010", "glass": "310T16AN", "crown": "45M04N"}, {"case": "5606-8020", "glass": "310T16AN", "crown": "45M04N"}, {"case": "5606-8030", "glass": "300W76GN", "crown": "45M30N"}, {"case": "5606-8031", "glass": "300W76GN", "crown": "45M30N"}, {"case": "5606-8040", "glass": "300W74GC", "crown": "45M30N"}, {"case": "5606-8050", "glass": "300W76GN", "crown": "45M30N"}, {"case": "5606-8051", "glass": "300W76GN", "crown": "45M30N"}, {"case": "5606-8060", "glass": "300W74GC", "crown": "45M30N"}, {"case": "5606-8061", "glass": "300W74GC", "crown": "45M30N"}, {"case": "5606-8080", "glass": "300R14GN", "crown": "45M04N"}, {"case": "5606-8090", "glass": "300W76GN", "crown": "45M30N"}, {"case": "5606-8100", "glass": "300W84GC", "crown": "45M30N"}, {"case": "5606-8110", "glass": "300W80GC", "crown": "45M30N"}, {"case": "5606-8120", "glass": "300W76GN", "crown": "45M30N"}, {"case": "5606-8130", "glass": "300W74GC", "crown": "45M30N"}, {"case": "5606-9000", "glass": "320T08AN", "crown": "45M04N"}, {"case": "5606-9020", "glass": "320T08AN", "crown": "45M04N"}, {"case": "5606-9030", "glass": "315V06GN", "crown": "45M04N"}, {"case": "5606-9040", "glass": "315V06GN", "crown": "45M04N"}, {"case": "5619-7000", "glass": "300V16GN", "crown": "45M04N"}, {"case": "5621-6000", "glass": "270V04GN", "crown": "55M02E"}, {"case": "5621-7000", "glass": "300T12AN", "crown": "55M02E"}, {"case": "5621-7020", "glass": "300V16GN", "crown": "55M02E"}, {"case": "5621-7021", "glass": "300V16GN", "crown": "55M02E"}, {"case": "5621-7022", "glass": "300V16GN", "crown": "55M12E"}, {"case": "5625-5010", "glass": "RE0V08GE", "crown": "45W30N"}, {"case": "5625-5040", "glass": "SA0W16AN", "crown": "40M04N"}, {"case": "5625-5060", "glass": "RE0V16GN", "crown": "45W30N"}, {"case": "5625-6000", "glass": "270V04GN", "crown": "55M02E"}, {"case": "5625-7000", "glass": "300V04GN", "crown": "55M02E"}, {"case": "5625-7010", "glass": "300V04GN", "crown": "55M02E"}, {"case": "5625-7030", "glass": "300V04GN", "crown": "55M02E"}, {"case": "5625-7040", "glass": "300V04GN", "crown": "55M02E"}, {"case": "5625-7041", "glass": "300V16GN", "crown": "55M02E"}, {"case": "5625-7060", "glass": "300V04GN", "crown": "55M02E"}, {"case": "5625-7070", "glass": "300T12AN", "crown": "55M02E"}, {"case": "5625-7080", "glass": "300V16GN", "crown": "55M02E"}, {"case": "5625-7110", "glass": "300V16GN", "crown": "55M02E"}, {"case": "5625-7111", "glass": "300V16GN", "crown": "55M02E"}, {"case": "5625-7112", "glass": "300V16GN", "crown": "55M02E"}, {"case": "5625-7113", "glass": "300V16GN", "crown": "55M12E"}, {"case": "5625-7120", "glass": "300V16GN", "crown": "55M02E"}, {"case": "5625-7121", "glass": "300V16GN", "crown": "55M02E"}, {"case": "5625-7122", "glass": "300V16GN", "crown": "55M12E"}, {"case": "5625-7170", "glass": "300V98GC", "crown": "55W02E"}, {"case": "5625-8000", "glass": "300W76GN", "crown": "45M30N"}, {"case": "5625-8001", "glass": "300W76GN", "crown": "45M30N"}, {"case": "5626-5010", "glass": "RE0V08GC", "crown": "45W30N"}, {"case": "5626-5030", "glass": "お預りの上修理いたします。", "crown": "55M02E"}, {"case": "5626-5040", "glass": "SA0W16AN", "crown": "45M04N"}, {"case": "5626-5050", "glass": "RE0V20GC", "crown": "45W30N"}, {"case": "5626-5060", "glass": "RE0V16GN", "crown": "45W30N"}, {"case": "5626-5070", "glass": "BA0V04GC", "crown": "45M04N"}, {"case": "5626-5080", "glass": "BA0V12GC", "crown": "45M30N"}, {"case": "5626-6000", "glass": "270V04GN", "crown": "55M02E"}, {"case": "5626-6010", "glass": "270V08GC", "crown": "45M04N"}, {"case": "5626-6020", "glass": "270V04GN", "crown": "55M02E"}, {"case": "5626-7000", "glass": "300V04GN", "crown": "55M02E"}, {"case": "5626-7010", "glass": "300V04GN", "crown": "55M02E"}, {"case": "5626-7030", "glass": "300V04GN", "crown": "55M02E"}, {"case": "5626-7040", "glass": "300V04GN", "crown": "55M02E"}, {"case": "5626-7041", "glass": "300V16GN", "crown": "55M02E"}, {"case": "5626-7060", "glass": "300V04GN", "crown": "55M02E"}, {"case": "5626-7061", "glass": "300V04GN", "crown": "55M02E"}, {"case": "5626-7070", "glass": "300T12AN", "crown": "55M02E"}, {"case": "5626-7080", "glass": "300V16GN", "crown": "55M02E"}, {"case": "5626-7110", "glass": "300V16GN", "crown": "55M02E"}, {"case": "5626-7111", "glass": "300V16GN", "crown": "55M02E"}, {"case": "5626-7112", "glass": "300V16GN", "crown": "55M02E"}, {"case": "5626-7113", "glass": "300V16GN", "crown": "55M12E"}, {"case": "5626-7120", "glass": "300V16GN", "crown": "55M02E"}, {"case": "5626-7121", "glass": "300V16GN", "crown": "55M02E"}, {"case": "5626-7122", "glass": "300V16GN", "crown": "55M12E"}, {"case": "5626-7140", "glass": "300V62GC", "crown": "55M02E"}, {"case": "5626-7150", "glass": "300V66GC", "crown": "55M02E"}, {"case": "5626-7160", "glass": "300V66GC", "crown": "55M12E"}, {"case": "5626-7161", "glass": "300V66GC", "crown": "55M12E"}, {"case": "5626-7170", "glass": "300V98GC", "crown": "55M02E"}, {"case": "5626-7171", "glass": "300V98GC", "crown": "55M12E"}, {"case": "5626-7180", "glass": "300V84GC", "crown": "55M12E"}, {"case": "5626-7190", "glass": "300V66GC", "crown": "55M12EG"}, {"case": "5626-7200", "glass": "300V98GC", "crown": "55M12E"}, {"case": "5626-7210", "glass": "300V62GHSA", "crown": "55M02E"}, {"case": "5626-7220", "glass": "300V62GHSB", "crown": "55M02E"}, {"case": "5626-723A", "glass": "300W54GH01", "crown": "55M12E"}, {"case": "5626-723B", "glass": "300W54GH02", "crown": "55M12E"}, {"case": "5626-723C", "glass": "300W54GH03", "crown": "55M12E"}, {"case": "5626-7240", "glass": "280W04GC", "crown": "45M30N"}, {"case": "5626-7250", "glass": "300W72GC", "crown": "45M30N"}, {"case": "5626-726A", "glass": "290W06GM", "crown": "45M30N"}, {"case": "5626-8000", "glass": "300W76GN", "crown": "45M30N"}, {"case": "5626-8001", "glass": "300W76GN", "crown": "45M30N"}, {"case": "5626-8010", "glass": "300W76GN", "crown": "45M30N"}, {"case": "5626-8011", "glass": "300W76GN", "crown": "45M30N"}, {"case": "5626-8140", "glass": "300W76GN", "crown": "45M30N"}, {"case": "5626-8150", "glass": "300W76GN", "crown": "45M30N"}, {"case": "5626-8160", "glass": "300W76GN", "crown": "45M30N"}, {"case": "5641-7000", "glass": "300T24AN", "crown": "45M18N"}, {"case": "5645-5010", "glass": "BA0V02GN", "crown": "45M18N"}, {"case": "5645-7000", "glass": "300T24AN", "crown": "45M18N"}, {"case": "5645-7010", "glass": "300V16GN", "crown": "45M18N"}, {"case": "5645-7011", "glass": "300V16GN", "crown": "45M32N"}, {"case": "5645-8000", "glass": "305V12GN", "crown": "45M18N"}, {"case": "5646-5010", "glass": "BA0V02GN", "crown": "45M18N"}, {"case": "5646-7000", "glass": "300T24AN", "crown": "45M18N"}, {"case": "5646-7010", "glass": "300V16GN", "crown": "45M18N"}, {"case": "5646-7011", "glass": "300V16GN", "crown": "45M32N"}, {"case": "5646-7020", "glass": "300V66GC", "crown": "45M18N"}, {"case": "5646-7021", "glass": "300V66GC", "crown": "45M32N"}, {"case": "5646-7030", "glass": "300V82GN", "crown": "45M32N"}, {"case": "5646-7040", "glass": "300T20AN", "crown": "45M32N"}, {"case": "5646-8000", "glass": "305V12GN", "crown": "45M18N"}, {"case": "5722-9010", "glass": "330T03AN", "crown": "55W31N"}, {"case": "5722-9011", "glass": "330T03AN", "crown": "55W31N"}, {"case": "5722-9990", "glass": "327W01AN", "crown": "55W31N"}, {"case": "5722-9991", "glass": "327W01AN", "crown": "55W31N"}, {"case": "5740-0010", "glass": "330W06AN", "crown": "55W12N"}, {"case": "5740-0080", "glass": "320N02AN", "crown": "50M28N"}, {"case": "5740-1990", "glass": "330N02AN", "crown": "55R15N"}, {"case": "5740-8000", "glass": "310W04AN", "crown": "55W12N"}, {"case": "5740-8010", "glass": "305N04AN", "crown": "50W14N"}, {"case": "6100-8000", "glass": "310T18AN", "crown": "45W30N"}, {"case": "6102-0010", "glass": "317N02AN", "crown": "50W14N"}, {"case": "6102-8000", "glass": "310T18AN", "crown": "45W30N"}, {"case": "6105-6000", "glass": "300T04AN", "crown": "35M10N"}, {"case": "6105-8000", "glass": "メーカー保証品", "crown": ""}, {"case": "6105-8110", "glass": "", "crown": ""}, {"case": "6106-5440", "glass": "RE0W02AN", "crown": "45M08N"}, {"case": "6106-5470", "glass": "RE0W12AC", "crown": "45M08N"}, {"case": "6106-5530", "glass": "RE0W34AN", "crown": "45M36N"}, {"case": "6106-6000", "glass": "300T04AN", "crown": "35M10N"}, {"case": "6106-6030", "glass": "320T02AN", "crown": "35M10N"}, {"case": "6106-6040", "glass": "330W16GN", "crown": "50M04N"}, {"case": "6106-6400", "glass": "320T02AN", "crown": "35M10N"}, {"case": "6106-6410", "glass": "330W16GN", "crown": "50M04N"}, {"case": "6106-6430", "glass": "330W16GN", "crown": "50M04N"}, {"case": "6106-6440", "glass": "330W16GN", "crown": "50M04N"}, {"case": "6106-7000", "glass": "300T12AN", "crown": "35M10N"}, {"case": "6106-7003", "glass": "300T12AN", "crown": "35M10N"}, {"case": "6106-7010", "glass": "300T12AN", "crown": "35M10N"}, {"case": "6106-7020", "glass": "300T12AN", "crown": "35M10N"}, {"case": "6106-7030", "glass": "300T12AN", "crown": "35M10N"}, {"case": "6106-7040", "glass": "300T12AN", "crown": "35M10N"}, {"case": "6106-7050", "glass": "300T18AN", "crown": "35M10N"}, {"case": "6106-7410", "glass": "300T12AN", "crown": "40M16N"}, {"case": "6106-7420", "glass": "320W10GN", "crown": "40M16N"}, {"case": "6106-7430", "glass": "300T12AN", "crown": "40M16N"}, {"case": "6106-7440", "glass": "320W10GN", "crown": "40M16N"}, {"case": "6106-7460", "glass": "300V20GN", "crown": "40M16N"}, {"case": "6106-7470", "glass": "300V20GN", "crown": "40M16N"}, {"case": "6106-7480", "glass": "300V20GN", "crown": "40M16N"}, {"case": "6106-7490", "glass": "300V20GN", "crown": "40M16N"}, {"case": "6106-7510", "glass": "300V20GN", "crown": "40M16N"}, {"case": "6106-7520", "glass": "300V20GN", "crown": "40M16N"}, {"case": "6106-7550", "glass": "300V98GC", "crown": "40M16N"}, {"case": "6106-7551", "glass": "300V64GC", "crown": "40M16N"}, {"case": "6106-7560", "glass": "300V16GN", "crown": "40M16N"}, {"case": "6106-7570", "glass": "300V64GC", "crown": "40M16N"}, {"case": "6106-7580", "glass": "300V16GN", "crown": "40M16N"}, {"case": "6106-7590", "glass": "300V62GC", "crown": "40M16N"}, {"case": "6106-7600", "glass": "300V64GC", "crown": "40M16N"}, {"case": "6106-7640", "glass": "300V16GN", "crown": "35M10N"}, {"case": "6106-7660", "glass": "310W22GC", "crown": "40M16N"}, {"case": "6106-7670", "glass": "310W20GC", "crown": "40M16N"}, {"case": "6106-7680", "glass": "310W18GC", "crown": "40M16N"}, {"case": "6106-7690", "glass": "300V98GC", "crown": "40M16N"}, {"case": "6106-7700", "glass": "300V64GC", "crown": "40M26N"}, {"case": "6106-7710", "glass": "300W52GC", "crown": "40M26N"}, {"case": "6106-7740", "glass": "300V20GN", "crown": "40M16N"}, {"case": "6106-8000", "glass": "310T08AN", "crown": "35M10N"}, {"case": "6106-8010", "glass": "310T08AN", "crown": "35M10N"}, {"case": "6106-8020", "glass": "310T08AN", "crown": "35M10N"}, {"case": "6106-8070", "glass": "310T10AN", "crown": "35M10N"}, {"case": "6106-8120", "glass": "320W10GN", "crown": "35M10N"}, {"case": "6106-8130", "glass": "310T12AN", "crown": "35M10N"}, {"case": "6106-8131", "glass": "310T12AN", "crown": "35M10N"}, {"case": "6106-8140", "glass": "310T12AN", "crown": "35M10N"}, {"case": "6106-8170", "glass": "310T18AN", "crown": "35M10N"}, {"case": "6106-8180", "glass": "330W16GN", "crown": "40M16N"}, {"case": "6106-8400", "glass": "310T18AN", "crown": "40M16N"}, {"case": "6106-8410", "glass": "320W10GN", "crown": "40M16N"}, {"case": "6106-8420", "glass": "310T18AN", "crown": "40M16N"}, {"case": "6106-8430", "glass": "310T18AN", "crown": "40M16N"}, {"case": "6106-8440", "glass": "320W10GN", "crown": "40M16N"}, {"case": "6106-8450", "glass": "320W10GN", "crown": "40M16N"}, {"case": "6106-8460", "glass": "310T18AN", "crown": "35M10N"}, {"case": "6106-8470", "glass": "320T16AN", "crown": "35M10N"}, {"case": "6106-8510", "glass": "320W10GN", "crown": "40M16N"}, {"case": "6106-8560", "glass": "320W28GN", "crown": "40M16N"}, {"case": "6106-8570", "glass": "310T18AN", "crown": "35M10N"}, {"case": "6106-8610", "glass": "310T18AN", "crown": "40M16N"}, {"case": "6106-8660", "glass": "310W28GN", "crown": "40M26N"}, {"case": "6106-8670", "glass": "310W28GN", "crown": "40M26N"}, {"case": "6106-8680", "glass": "310W28GN", "crown": "40M26N"}, {"case": "6106-8690", "glass": "310W30GC", "crown": "40M26N"}, {"case": "6106-8750", "glass": "310W28GN", "crown": "40M16N"}, {"case": "6106-8760", "glass": "310W32GC", "crown": "40M26N"}, {"case": "6106-9030", "glass": "320T04AN", "crown": "35M10N"}, {"case": "6110-0010", "glass": "429N01AN", "crown": "70M02N"}, {"case": "6117-6400", "glass": "350T02AN", "crown": "50M04N"}, {"case": "6117-6410", "glass": "350T02AN", "crown": "50M04N"}, {"case": "6119-6010", "glass": "320T02AN", "crown": "35M10N"}, {"case": "6119-6020", "glass": "320W10GN", "crown": "60W06N"}, {"case": "6119-6030", "glass": "320T02AN", "crown": "35M10N"}, {"case": "6119-6040", "glass": "320T02AN", "crown": "35M10N"}, {"case": "6119-6050", "glass": "330W16GN", "crown": "45M10N"}, {"case": "6119-7000", "glass": "300T10AN", "crown": "35M10N"}, {"case": "6119-7010", "glass": "300T12AN", "crown": "35M10N"}, {"case": "6119-7020", "glass": "300T12AN", "crown": "35M10N"}, {"case": "6119-7030", "glass": "300T12AN", "crown": "35M10N"}, {"case": "6119-7040", "glass": "300T12AN", "crown": "35M10N"}, {"case": "6119-7160", "glass": "340W12GN", "crown": "50M04N"}, {"case": "6119-7170", "glass": "320W10GN", "crown": "40M16N"}, {"case": "6119-8020", "glass": "310T12AN", "crown": "35M10N"}, {"case": "6119-8021", "glass": "310T12AN", "crown": "35M10N"}, {"case": "6119-8030", "glass": "310T12AN", "crown": "35M10N"}, {"case": "6119-8031", "glass": "310T12AN", "crown": "35M10N"}, {"case": "6119-8040", "glass": "310T08AN", "crown": "35M10N"}, {"case": "6119-8120", "glass": "320W10GN", "crown": "35M10N"}, {"case": "6119-8130", "glass": "320W10GN", "crown": "35M10N"}, {"case": "6119-8140", "glass": "320W10GN", "crown": "35M10N"}, {"case": "6119-8220", "glass": "320W10GN", "crown": "40M16N"}, {"case": "6119-8230", "glass": "330T12AN", "crown": "40M16N"}, {"case": "6119-8240", "glass": "330W16GN", "crown": "40M16N"}, {"case": "6119-8250", "glass": "330T12AN", "crown": "40M16N"}, {"case": "6119-8300", "glass": "320W10GN", "crown": "40M16N"}, {"case": "6119-8310", "glass": "320W10GN", "crown": "40M16N"}, {"case": "6138-0010", "glass": "340W14GN", "crown": "55M06N"}, {"case": "6138-0011", "glass": "340W14GN", "crown": "55M06N"}, {"case": "6138-0020", "glass": "340W14GN", "crown": "55M06N"}, {"case": "6138-0030", "glass": "340W14GN", "crown": "55M06N"}, {"case": "6138-0040", "glass": "340W14GN", "crown": "65M02N"}, {"case": "6138-3000", "glass": "365V02GN", "crown": "55M06N"}, {"case": "6138-8000", "glass": "335V06GN", "crown": "55M06N"}, {"case": "6138-8001", "glass": "340W18GN", "crown": "55M18N"}, {"case": "6138-8010", "glass": "340W16GN", "crown": "55M06N"}, {"case": "6138-8020", "glass": "350T02AN", "crown": "55M06N"}, {"case": "6139-6001", "glass": "330W18GN", "crown": "50M04N"}, {"case": "6139-6002", "glass": "330W18GN", "crown": "50M04N"}, {"case": "6139-6011", "glass": "330W18GN", "crown": "40M16N"}, {"case": "6139-6031", "glass": "330W18GN", "crown": "50M04N"}, {"case": "6139-6032", "glass": "330W18GN", "crown": "50M04N"}, {"case": "6139-7001", "glass": "340W14GN", "crown": "40M16N"}, {"case": "6139-7010", "glass": "340W14GN", "crown": "40M16N"}, {"case": "6139-7011", "glass": "340W14GN", "crown": "40M16N"}, {"case": "6139-7012", "glass": "340W14GN", "crown": "40M16N"}, {"case": "6139-7020", "glass": "340W14GN", "crown": "50M04N"}, {"case": "6139-7050", "glass": "335V10GN", "crown": "40M16N"}, {"case": "6139-7060", "glass": "340W14GN", "crown": "50M04N"}, {"case": "6139-8001", "glass": "320W28GN", "crown": "40M16N"}, {"case": "6139-8002", "glass": "320W28GN", "crown": "40M16N"}, {"case": "6139-8010", "glass": "305W12GN", "crown": "40M16N"}, {"case": "6139-8040", "glass": "310W24GN", "crown": "40M26N"}, {"case": "6139-8050", "glass": "310W24GN", "crown": "40M26N"}, {"case": "6145-8000", "glass": "310T08AN", "crown": "55W08N"}, {"case": "6145-8020", "glass": "300V14GN", "crown": "50M02N"}, {"case": "6145-8050", "glass": "310V16GC", "crown": "50M02N"}, {"case": "6146-8000", "glass": "310T08AN", "crown": "55W08N"}, {"case": "6146-8010", "glass": "300V06SE", "crown": "55W08N"}, {"case": "6146-8020", "glass": "300V14GN", "crown": "50M02N"}, {"case": "6146-8050", "glass": "310V16GC", "crown": "50M02N"}, {"case": "6155-8000", "glass": "305V06GN", "crown": "50M02N"}, {"case": "6156-8000", "glass": "305V06GN", "crown": "50M02N"}, {"case": "6156-8010", "glass": "300V18SE", "crown": "50M02N"}, {"case": "6156-8020", "glass": "310T08AN", "crown": "55W08N"}, {"case": "6156-8030", "glass": "310W24GN", "crown": "50M02N"}, {"case": "6156-8040", "glass": "300W76GN", "crown": "50M02N"}, {"case": "6201-8930", "glass": "327W01AN", "crown": "35M01N"}, {"case": "6201-8950", "glass": "327W04AN", "crown": "35M03N"}, {"case": "6206-8010", "glass": "325W04AN", "crown": "35M05N"}, {"case": "6206-8040", "glass": "325W06AN", "crown": "35M08N"}, {"case": "6206-8090", "glass": "315T03AN", "crown": "35M03N"}, {"case": "6206-8100", "glass": "315T03AN", "crown": "35M03N"}, {"case": "6206-8110", "glass": "315T03AN", "crown": "35M03N"}, {"case": "6206-8120", "glass": "310W01AN", "crown": "35M03N"}, {"case": "6206-8130", "glass": "315T03AN", "crown": "35M03N"}, {"case": "6206-8150", "glass": "310W04AN", "crown": "35M03N"}, {"case": "6206-8160", "glass": "315T03AN", "crown": "35M03N"}, {"case": "6206-8170", "glass": "315T03AN", "crown": "35M03N"}, {"case": "6206-8190", "glass": "315T03AN", "crown": "35M03N"}, {"case": "6206-8980", "glass": "338W01AN", "crown": "35M03N"}, {"case": "6216-9000", "glass": "320W03AN", "crown": "40M10N"}, {"case": "6216-9010", "glass": "320T01AN", "crown": "40M10N"}, {"case": "6217-7000", "glass": "341W02AN", "crown": "60W01N"}, {"case": "6217-8000", "glass": "315T01AN", "crown": "65W01N"}, {"case": "6217-8001", "glass": "315T01AN", "crown": "65W01N"}, {"case": "6220-7080", "glass": "280T01AN", "crown": "45W30N"}, {"case": "6220-7120", "glass": "280N03AN", "crown": "45R03N"}, {"case": "6220-7140", "glass": "300T10AN", "crown": "45W30N"}, {"case": "6220-8010", "glass": "325W04AN", "crown": "45W24N"}, {"case": "6220-9000", "glass": "330W06AN", "crown": "45W24N"}, {"case": "6220-9970", "glass": "338W01AN", "crown": "45W24N"}, {"case": "6220-9990", "glass": "338W01AN", "crown": "45W24N"}, {"case": "6222-0010", "glass": "318N05AN", "crown": "45R02N"}, {"case": "6222-0020", "glass": "318N05AN", "crown": "45R02N"}, {"case": "6222-5010", "glass": "BA0N04AN", "crown": "45R03N"}, {"case": "6222-7020", "glass": "280T01AN", "crown": "45W30N"}, {"case": "6222-7060", "glass": "300T10AN", "crown": "45W30N"}, {"case": "6222-8000", "glass": "325W04AN", "crown": "45W24N"}, {"case": "6222-9000", "glass": "330W06AN", "crown": "45W24N"}, {"case": "6245-9000", "glass": "320T01AN", "crown": "40M02N"}, {"case": "6245-9001", "glass": "320T01AN", "crown": "40M02N"}, {"case": "6306-5000", "glass": "BA0W46AN", "crown": "45M40NS"}, {"case": "6306-7000", "glass": "メーカー保証品", "crown": ""}, {"case": "6306-7010", "glass": "300T20ANS", "crown": "45M30NS"}, {"case": "6306-8000", "glass": "310W40GA", "crown": "55E04NS"}, {"case": "6306-8010", "glass": "310W40GA", "crown": "55E04NS"}, {"case": "6306-8020", "glass": "310W36GN", "crown": "45M30NS"}, {"case": "6306-8030", "glass": "310W42GC", "crown": "45M30NS"}, {"case": "6306-8040", "glass": "310W42GC", "crown": "45M30NS"}, {"case": "6306-8050", "glass": "310W36GN", "crown": "45M30NG"}, {"case": "6306-8060", "glass": "310W40GA", "crown": "55E04NS"}, {"case": "6306-806A", "glass": "310W40GA", "crown": "55E04NS"}, {"case": "6600-1990", "glass": "330N02AN", "crown": "45R03N"}, {"case": "6600-9980", "glass": "327W04AN", "crown": "55W02N"}, {"case": "6600-9981", "glass": "327W04AN", "crown": "55W02N"}, {"case": "6601-7000", "glass": "327W01AN", "crown": "35M02N"}, {"case": "6601-7990", "glass": "341W02AN", "crown": "60W01N"}, {"case": "6601-7991", "glass": "341W02AN", "crown": "60W01N"}, {"case": "6601-8930", "glass": "327W04AN", "crown": "35M02N"}, {"case": "6601-8940", "glass": "327W04AN", "crown": "35M02N"}, {"case": "6601-8960", "glass": "327W04AN", "crown": "35M02N"}, {"case": "6601-8961", "glass": "327W04AN", "crown": "35M02N"}, {"case": "6602-1990", "glass": "330N02AN", "crown": "45R03N"}, {"case": "6602-2990", "glass": "341N02AN", "crown": "45R03N"}, {"case": "6602-7030", "glass": "300W01AN", "crown": "55W02N"}, {"case": "6602-7031", "glass": "300W01AN", "crown": "55W10N"}, {"case": "6602-7040", "glass": "315W02AN", "crown": "55W10N"}, {"case": "6602-9010", "glass": "305N02AN", "crown": "45W24N"}, {"case": "6602-9980", "glass": "327W01AN", "crown": "55W02N"}, {"case": "6602-9981", "glass": "327W01AN", "crown": "55W02N"}, {"case": "6602-9982", "glass": "327W01AN", "crown": "55W10N"}, {"case": "6618-6000", "glass": "260N02AN", "crown": "45W21N"}, {"case": "6618-8000", "glass": "315N02AN", "crown": "55W02N"}, {"case": "6618-8001", "glass": "315N02AN", "crown": "55W02N"}, {"case": "6619-7010", "glass": "325W04AN", "crown": "35M06N"}, {"case": "6619-7020", "glass": "325W04AN", "crown": "35M06N"}, {"case": "6619-7030", "glass": "325W04AN", "crown": "35M06N"}, {"case": "6619-7060", "glass": "305W04AN", "crown": "35M03N"}, {"case": "6619-7070", "glass": "305T02AN", "crown": "35M06N"}, {"case": "6619-7970", "glass": "327W01AN", "crown": "35M03N"}, {"case": "6619-7980", "glass": "327W01AN", "crown": "35M03N"}, {"case": "6619-7990", "glass": "327W01AN", "crown": "35M03N"}, {"case": "6619-8000", "glass": "325W04AN", "crown": "35M06N"}, {"case": "6619-8030", "glass": "325W04AN", "crown": "35M06N"}, {"case": "6619-8040", "glass": "325W04AN", "crown": "35M06N"}, {"case": "6619-8050", "glass": "325W06AN", "crown": "35M06N"}, {"case": "6619-8060", "glass": "325W06AN", "crown": "35M03N"}, {"case": "6619-8090", "glass": "315T03AN", "crown": "35M03N"}, {"case": "6619-8100", "glass": "315T03AN", "crown": "35M03N"}, {"case": "6619-8110", "glass": "320W03AN", "crown": "35M03N"}, {"case": "6619-8120", "glass": "325W06AN", "crown": "35M03N"}, {"case": "6619-8130", "glass": "325W04AN", "crown": "35M03N"}, {"case": "6619-8140", "glass": "325W04AN", "crown": "35M03N"}, {"case": "6619-8150", "glass": "325W06AN", "crown": "35M06N"}, {"case": "6619-8180", "glass": "325W06AN", "crown": "35M03N"}, {"case": "6619-8190", "glass": "325W04AN", "crown": "35M03N"}, {"case": "6619-8200", "glass": "325W04AN", "crown": "35M06N"}, {"case": "6619-8250", "glass": "315T03AN", "crown": "35M03N"}, {"case": "6619-8280", "glass": "320W03AN", "crown": "35M03N"}, {"case": "6619-8290", "glass": "315T03AN", "crown": "35M03N"}, {"case": "6619-8940", "glass": "327W01AN", "crown": "35M03N"}, {"case": "6619-8970", "glass": "327W01AN", "crown": "35M03N"}, {"case": "6619-8980", "glass": "327W01AN", "crown": "35M03N"}, {"case": "6619-9000", "glass": "330T02AN", "crown": "35M03N"}, {"case": "6619-9010", "glass": "340W01AN", "crown": "35M03N"}, {"case": "6619-9030", "glass": "330T02AN", "crown": "35M03N"}, {"case": "6619-9040", "glass": "330T02AN", "crown": "35M03N"}, {"case": "6619-9070", "glass": "343W02AN", "crown": "35M03N"}, {"case": "6619-9080", "glass": "330W06AN", "crown": "35M03N"}, {"case": "6660-6000", "glass": "227N02AN", "crown": "40R05N"}, {"case": "6660-7000", "glass": "282N01AN", "crown": "40R05N"}, {"case": "6660-7010", "glass": "282N01AN", "crown": "40R05N"}, {"case": "6660-7020", "glass": "282N01AN", "crown": "40R05N"}, {"case": "6660-7030", "glass": "282N01AN", "crown": "40R05N"}, {"case": "7005-5000", "glass": "RE0W01AN", "crown": "45W29N"}, {"case": "7005-7000", "glass": "300T25AN", "crown": "40M17N"}, {"case": "7005-7001", "glass": "300T25AN", "crown": "40M17N"}, {"case": "7005-7030", "glass": "310W11GN", "crown": "40M25N"}, {"case": "7005-7031", "glass": "310W11GN", "crown": "40M25N"}, {"case": "7005-8000", "glass": "310T23AN", "crown": "40M17N"}, {"case": "7005-8010", "glass": "310T17AN", "crown": "40M17N"}, {"case": "7015-6000", "glass": "340W09GN", "crown": "50M17N"}, {"case": "7015-6010", "glass": "320W17GN", "crown": "40M35N"}, {"case": "7015-7000", "glass": "310W13GN", "crown": "40M35N"}, {"case": "7015-7010", "glass": "330W16GN", "crown": "50M17N"}, {"case": "7015-7020", "glass": "330W16GN", "crown": "50M11N"}, {"case": "7015-8000", "glass": "310V01GA", "crown": "40M35N"}, {"case": "7017-6000", "glass": "330W16GN", "crown": "50M11N"}, {"case": "7017-6010", "glass": "330W16GN", "crown": "50M17N"}, {"case": "7017-6020", "glass": "330W16GN", "crown": "50M17N"}, {"case": "7017-6030", "glass": "330W16GN", "crown": "50M11N"}, {"case": "7017-6040", "glass": "330W16GN", "crown": "50M11N"}, {"case": "7017-6050", "glass": "330W16GN", "crown": "50M11N"}, {"case": "7017-7000", "glass": "285V05GN", "crown": "40M23N"}, {"case": "7017-8000", "glass": "320W10GN", "crown": "40M35N"}, {"case": "7018-5000", "glass": "SA0V05GN", "crown": "40M47N"}, {"case": "7018-5001", "glass": "SA0V09GN", "crown": "40M71N"}, {"case": "7018-6000", "glass": "320W17GN", "crown": "40M35N"}, {"case": "7018-7000", "glass": "300V11GN", "crown": "40M63N"}, {"case": "7018-7001", "glass": "300V11GN", "crown": "40M63N"}, {"case": "7018-8000", "glass": "310T43AN", "crown": "40M63N"}, {"case": "7018-8001", "glass": "310T43AN", "crown": "40M63N"}, {"case": "7019-5000", "glass": "SA0W31AN", "crown": "40M53N"}, {"case": "7019-5010", "glass": "SA0W21AN", "crown": "40M53NS1"}, {"case": "7019-5040", "glass": "SA0W21AN", "crown": "50M25N"}, {"case": "7019-5050", "glass": "300W53GN", "crown": "40M69N"}, {"case": "7019-5070", "glass": "RE0W25AN", "crown": "45M29NS1"}, {"case": "7019-6000", "glass": "330W16GN", "crown": "50M17N"}, {"case": "7019-6010", "glass": "330W16GN", "crown": "50M17N"}, {"case": "7019-6020", "glass": "330W16GN", "crown": "50M15N"}, {"case": "7019-6030", "glass": "330W16GN", "crown": "50M13N"}, {"case": "7019-6040", "glass": "330W16GN", "crown": "50M13N"}, {"case": "7019-6050", "glass": "335W03GN", "crown": "40M67N"}, {"case": "7019-6060", "glass": "320T21AN", "crown": "40M61N"}, {"case": "7019-7000", "glass": "300T25AN", "crown": "40M29N"}, {"case": "7019-7010", "glass": "310W11GN", "crown": "40M43N"}, {"case": "7019-7020", "glass": "310W11GN", "crown": "40M25N"}, {"case": "7019-7030", "glass": "310W11GN", "crown": "40M25N"}, {"case": "7019-7040", "glass": "310W13GN", "crown": "40M71N"}, {"case": "7019-7050", "glass": "310W11GN", "crown": "40M29N"}, {"case": "7019-7060", "glass": "310W13GN", "crown": "40M71N"}, {"case": "7019-7060", "glass": "310W13GN", "crown": "40M71NS1"}, {"case": "7019-7070", "glass": "310W13GN", "crown": "40M71N"}, {"case": "7019-7080", "glass": "300T25AN", "crown": "40M29N"}, {"case": "7019-7150", "glass": "300V17GH", "crown": "40M69N"}, {"case": "7019-7160", "glass": "300V19GH", "crown": "40M69N"}, {"case": "7019-7170", "glass": "290V03GM", "crown": "40M65N"}, {"case": "7019-7210", "glass": "300V21GC", "crown": "40M71N"}, {"case": "7019-7220", "glass": "300V19GH", "crown": "40M69N"}, {"case": "7019-7230", "glass": "300V23GC", "crown": "40M71N"}, {"case": "7019-7240", "glass": "300V27GC", "crown": "40M35N"}, {"case": "7019-7250", "glass": "300V25GC", "crown": "40M71N"}, {"case": "7019-7260", "glass": "300V29GC", "crown": "40M69N"}, {"case": "7019-7270", "glass": "300V31GC", "crown": "40M69N"}, {"case": "7019-7280", "glass": "300V29GH", "crown": "40M69N"}, {"case": "7019-7290", "glass": "300V33GC", "crown": "40M63N"}, {"case": "7019-7300", "glass": "300V35GC", "crown": "40M71N"}, {"case": "7019-7310", "glass": "300W33GC", "crown": "40M69N"}, {"case": "7019-7320", "glass": "300W37GC", "crown": "40M69N"}, {"case": "7019-7330", "glass": "300W35GC", "crown": "40M61N"}, {"case": "7019-7340", "glass": "300W41GC", "crown": "40M67N"}, {"case": "7019-7350", "glass": "300W41GC", "crown": "40M71N"}, {"case": "7019-7350", "glass": "300W41GC", "crown": "40M71NS1"}, {"case": "7019-7360", "glass": "300W51GC", "crown": "40M67N"}, {"case": "7019-8000", "glass": "310T49AN", "crown": "40M29N"}, {"case": "7019-8010", "glass": "310T49AN", "crown": "40M23N"}, {"case": "7019-8010", "glass": "310T49ANSO", "crown": "40M23NS1"}, {"case": "7019-8020", "glass": "320W10GN", "crown": "40M23NS1"}, {"case": "7019-8030", "glass": "320W10GN", "crown": "40M29N"}, {"case": "7019-8050", "glass": "320T13AN", "crown": "40M61N"}, {"case": "7039-7000", "glass": "295W09GH", "crown": "40M43NG"}, {"case": "7039-7011", "glass": "300W43GN", "crown": "40M69N"}, {"case": "7039-7020", "glass": "300W43GN", "crown": "40M65N"}, {"case": "7622-8000", "glass": "315W03AN", "crown": "55W12N"}, {"case": "7622-8001", "glass": "315W03AN", "crown": "55W12N"}, {"case": "7622-8010", "glass": "310W09AL", "crown": "55W12N"}, {"case": "7622-8980", "glass": "327W09AN", "crown": "55W12N"}, {"case": "7622-8981", "glass": "327W09AN", "crown": "55W12N"}, {"case": "7622-9000", "glass": "325W05AN", "crown": "55W12N"}, {"case": "7622-9010", "glass": "325W05AN", "crown": "55W12N"}, {"case": "7625-1980", "glass": "338N01AN", "crown": "40N01N"}, {"case": "7625-1990", "glass": "338N01AN", "crown": "40N01N"}, {"case": "7625-8050", "glass": "325W05AN", "crown": "45M02N"}, {"case": "7625-8051", "glass": "325W05AN", "crown": "45M02N"}, {"case": "7625-8070", "glass": "325W05AN", "crown": "40M06N"}, {"case": "7625-8090", "glass": "325W05AN", "crown": "40M06N"}, {"case": "7625-8100", "glass": "320W05AN", "crown": "40M06N"}, {"case": "7625-8130", "glass": "325W05AN", "crown": "45M02N"}, {"case": "7625-8140", "glass": "325W05AN", "crown": "45M02N"}, {"case": "7625-8260", "glass": "325W05AN", "crown": "40M06N"}, {"case": "7625-8263", "glass": "325W05AN", "crown": "40M06N"}, {"case": "7625-8293", "glass": "310W09AL", "crown": "30M09N"}, {"case": "7625-8303", "glass": "335W02AN", "crown": "35M03N"}, {"case": "7625-8930", "glass": "327W02AL", "crown": "35M03N"}, {"case": "7625-8960", "glass": "327W02AL", "crown": "35M03N"}, {"case": "7625-8961", "glass": "327W02AL", "crown": "35M03N"}, {"case": "7625-8970", "glass": "327W02AL", "crown": "35M03N"}, {"case": "7625-8980", "glass": "327W02AL", "crown": "35M03N"}, {"case": "7625-9000", "glass": "340W02AN", "crown": "35M03N"}, {"case": "8305-0020", "glass": "340W05AN", "crown": "35M08N"}, {"case": "8305-1010", "glass": "340W01AN", "crown": "35M05N"}, {"case": "8305-5000", "glass": "BA0N04AN", "crown": "45S06N"}, {"case": "8305-8010", "glass": "315T03AN", "crown": "45W24N"}, {"case": "8305-8030", "glass": "315T06AN", "crown": "45W24N"}, {"case": "8305-8031", "glass": "315T06AN", "crown": "45W24N"}, {"case": "8305-8050", "glass": "310T05AN", "crown": "45W24N"}, {"case": "8305-8051", "glass": "310T05AN", "crown": "45W24N"}, {"case": "8305-8060", "glass": "310T05AN", "crown": "45W24N"}, {"case": "8305-9010", "glass": "340W05AN", "crown": "35M08N"}, {"case": "8306-8000", "glass": "315W02AN", "crown": "45W25N"}, {"case": "8306-8001", "glass": "315W02AN", "crown": "45W25N"}, {"case": "8306-8020", "glass": "310T05AN", "crown": "45W24N"}, {"case": "8306-8070", "glass": "310T05AN", "crown": "45W24N"}, {"case": "8306-8071", "glass": "310T05AN", "crown": "45W24N"}, {"case": "8306-9000", "glass": "320W03AN", "crown": "35M06N"}, {"case": "8306-9030", "glass": "320W10GN", "crown": "45W25N"}, {"case": "8346-7000", "glass": "305T04AN", "crown": "45W25N"}, {"case": "8346-7010", "glass": "305T04AN", "crown": "45W24N"}, {"case": "8346-8000", "glass": "315W02AN", "crown": "45W24N"}, {"case": "8346-8020", "glass": "310T05AN", "crown": "45W24N"}, {"case": "8346-8030", "glass": "325W06AN", "crown": "45W25N"}, {"case": "8346-8040", "glass": "320W10GN", "crown": "45W25N"}, {"case": "8346-9000", "glass": "320W10GN", "crown": "45W25N"}, {"case": "8346-9010", "glass": "320W10GN", "crown": "45W25N"}, {"case": "8346-9020", "glass": "320W03AN", "crown": "30M06N"}];
+    let lang = "zh";
+    let lastHits = null;
+    let lastField = "case";
+    let lastQ = "";
+
+    function compact(s) {
+      return String(s || "").replace(/\s+/g, "").toUpperCase();
+    }
+
+    function queryPattern(q) {
+      let out = "";
+      for (let i = 0; i < q.length; i++) {
+        const ch = q.charAt(i);
+        if (ch === "*" || ch === "#") {
+          out += "\\d";
+        } else if ("\\.^$|?*+()[]{}".indexOf(ch) >= 0) {
+          out += "\\" + ch;
+        } else {
+          out += ch;
+        }
+      }
+      return out;
+    }
+
+    function matches(row, field, q) {
+      const val = compact(row[field]);
+      if (!q || !val) return false;
+      try {
+        return new RegExp(queryPattern(q)).test(val);
+      } catch (e) {
+        return val.indexOf(q) !== -1;
+      }
+    }
+
+    function escapeHtml(s) {
+      return String(s || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
+    }
+
+    function highlight(text, q) {
+      const raw = String(text || "");
+      if (!q || !raw) return escapeHtml(raw);
+      let re;
+      try {
+        re = new RegExp(queryPattern(q), "g");
+      } catch (e) {
+        const upper = raw.toUpperCase();
+        let i = 0;
+        let html = "";
+        while (i < raw.length) {
+          const pos = upper.indexOf(q, i);
+          if (pos < 0) {
+            html += escapeHtml(raw.slice(i));
+            break;
+          }
+          html += escapeHtml(raw.slice(i, pos));
+          html += '<mark class="hit">' + escapeHtml(raw.slice(pos, pos + q.length)) + "</mark>";
+          i = pos + q.length;
+        }
+        return html;
+      }
+      let html = "";
+      let last = 0;
+      let m;
+      while ((m = re.exec(raw)) !== null) {
+        html += escapeHtml(raw.slice(last, m.index));
+        html += '<mark class="hit">' + escapeHtml(raw.slice(m.index, m.index + m[0].length)) + "</mark>";
+        last = m.index + Math.max(m[0].length, 1);
+        if (m[0].length === 0) re.lastIndex++;
+      }
+      html += escapeHtml(raw.slice(last));
+      return html;
+    }
+
+    function cell(text, field, current, q) {
+      const cls = field === current ? ' class="hit-col"' : "";
+      const inner = field === current ? highlight(text, q) : escapeHtml(text);
+      return "<td" + cls + ">" + inner + "</td>";
+    }
+
+    function t(key) {
+      return I18N[lang][key];
+    }
+
+    function updatePlaceholder() {
+      const field = document.getElementById("keyType").value;
+      const pack = I18N[lang];
+      const key = field === "glass" ? "placeholderGlass" : (field === "crown" ? "placeholderCrown" : "placeholderCase");
+      document.getElementById("keyValue").placeholder = pack[key];
+    }
+
+    function applyLang(next) {
+      lang = next;
+      localStorage.setItem("seiko_query_lang", lang);
+      const pack = I18N[lang];
+      document.documentElement.lang = pack.htmlLang;
+      document.title = pack.title;
+      document.querySelectorAll("[data-i18n]").forEach(function (el) {
+        el.textContent = pack[el.getAttribute("data-i18n")];
+      });
+      updatePlaceholder();
+      document.querySelectorAll(".langs button").forEach(function (btn) {
+        btn.classList.toggle("active", btn.getAttribute("data-lang") === lang);
+      });
+      if (lastHits !== null) render(lastHits, lastField, lastQ);
+    }
+
+    function render(hits, field, q) {
+      lastHits = hits;
+      lastField = field;
+      lastQ = q;
+      const out = document.getElementById("out");
+      if (!hits.length) {
+        out.innerHTML = '<p class="empty">' + t("empty") + "</p>";
+        return;
+      }
+      const nCase = new Set(hits.map(function (r) { return r.case; }).filter(Boolean)).size;
+      const nGlass = new Set(hits.map(function (r) { return r.glass; }).filter(Boolean)).size;
+      const nCrown = new Set(hits.map(function (r) { return r.crown; }).filter(Boolean)).size;
+      const body = hits.map(function (r) {
+        return "<tr>" +
+          cell(r.case, "case", field, q) +
+          cell(r.glass, "glass", field, q) +
+          cell(r.crown, "crown", field, q) +
+          "</tr>";
+      }).join("");
+      out.innerHTML =
+        '<div class="table-wrap"><table><thead><tr>' +
+        "<th>" + t("thCase") + " (" + nCase + ")</th>" +
+        "<th>" + t("thGlass") + " (" + nGlass + ")</th>" +
+        "<th>" + t("thCrown") + " (" + nCrown + ")</th>" +
+        "</tr></thead><tbody>" + body + "</tbody></table></div>";
+    }
+
+    function onQuery() {
+      const field = document.getElementById("keyType").value;
+      const q = compact(document.getElementById("keyValue").value);
+      if (!q) {
+        render([], field, q);
+        return;
+      }
+      render(ROWS.filter(function (row) { return matches(row, field, q); }), field, q);
+    }
+
+    document.getElementById("btn").addEventListener("click", onQuery);
+    document.getElementById("keyValue").addEventListener("keydown", function (e) {
+      if (e.key === "Enter") onQuery();
+    });
+    document.getElementById("keyType").addEventListener("change", updatePlaceholder);
+    document.querySelectorAll(".langs button").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        applyLang(btn.getAttribute("data-lang"));
+      });
+    });
+    applyLang(localStorage.getItem("seiko_query_lang") || "zh");
+  </script>
+</body>
+</html>
