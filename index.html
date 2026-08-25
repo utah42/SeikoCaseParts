@@ -70,6 +70,7 @@
       align-items: end;
     }
     .field, .eq, .query-btn { display: flex; flex-direction: column; gap: 6px; }
+    .input-row { display: contents; }
     .eq { align-items: center; justify-content: flex-end; padding-bottom: 10px; }
     .eq span { font-size: 18px; font-weight: 700; color: var(--muted); line-height: 1; }
     .lbl { font-size: 13px; color: var(--muted); }
@@ -83,8 +84,8 @@
       background: #fff;
       color: var(--text);
     }
-    select { min-width: 7.5rem; }
-    input[type="text"] { width: 100%; }
+    select { min-width: 7.5rem; max-width: 100%; }
+    input[type="text"] { width: 100%; min-width: 0; }
     #btn {
       cursor: pointer;
       background: var(--accent);
@@ -122,17 +123,37 @@
 
     @media (max-width: 720px) {
       .bar {
-        grid-template-columns: 1fr auto;
-        grid-template-areas:
-          "field field"
-          "eq input"
-          "btn btn";
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        align-items: stretch;
       }
-      .field { grid-area: field; }
-      .eq { grid-area: eq; justify-content: center; padding-bottom: 0; align-self: center; }
-      .query-input { grid-area: input; }
-      .query-btn { grid-area: btn; }
-      select, #btn { width: 100%; }
+      .field select {
+        width: auto;
+        max-width: 12rem;
+        min-width: 8rem;
+      }
+      .input-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        width: 100%;
+        min-width: 0;
+      }
+      .eq {
+        flex: 0 0 auto;
+        padding-bottom: 0;
+        align-self: center;
+      }
+      .query-input {
+        flex: 1 1 auto;
+        min-width: 0;
+      }
+      .query-input input[type="text"] {
+        width: 100%;
+        font-size: 15px;
+      }
+      #btn { width: 100%; }
       .langs button { min-width: 48px; min-height: 40px; }
     }
   </style>
@@ -181,9 +202,11 @@
         <option value="crown" data-i18n="optCrown">表冠</option>
       </select>
     </div>
-    <div class="eq"><span data-i18n="value">=</span></div>
-    <div class="query-input">
-      <input id="keyValue" type="text" autocomplete="off" enterkeyhint="search" />
+    <div class="input-row">
+      <div class="eq"><span data-i18n="value">=</span></div>
+      <div class="query-input">
+        <input id="keyValue" type="text" autocomplete="off" enterkeyhint="search" />
+      </div>
     </div>
     <div class="query-btn">
       <button id="btn" type="button" data-i18n="search">查询</button>
